@@ -10,11 +10,11 @@ class Button extends Component {
 
         return (
             <button
-            onClick={onClick}
-            className={className}
-            type="button"
+                onClick={onClick}
+                className={className}
+                type="button"
             >
-            {children}
+                {children}
             </button>
         )
     }
