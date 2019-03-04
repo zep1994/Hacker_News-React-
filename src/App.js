@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Search from './components/Search';
+import Table from './components/Table';
 
 const list = [
   {
@@ -16,6 +18,7 @@ const list = [
     points: 5,
     objectID: 1,
 }, ];
+
 
 class App extends Component {
   constructor(props) {
@@ -41,38 +44,21 @@ class App extends Component {
       }
 
       render() {
+        const { searchTerm, list } = this.state
         return (
           <div className="App">
-            <form>
-              <input 
-              type="text" 
-              onChange={this.onSearchChange}
-              />
-            </form>
-            {this.state.list.map(item => {
-              const onHandleDismiss = () =>
-                this.onDismiss(item.objectID);
-              return (
-                <div key={item.objectID}>
-                    <span>
-                      <a href={item.url}>{item.title}</a>
-                    </span>
-                    <span>{item.author}</span>
-                    <span>{item.num_comments}</span>
-                    <span>{item.points}</span>
-                    <span>
-                      <button
-                        onClick={() => this.onDismiss(item.objectID)}
-                        type="button"
-                        > Dismiss
-                        </button>
-                        </span>
-                </div>
-                )      
-              }
-            )
-          } 
-       </div>
+            
+        <Search
+          value={searchTerm}
+          onChange={this.onSearchChange}
+        > Search
+        </Search>
+        <Table
+          list={list}
+          pattern={searchTerm}
+          onDismiss={this.onDismiss}
+        />
+      </div>
     ); 
   }
 }
